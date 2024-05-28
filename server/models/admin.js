@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 module.exports = (sequelize, DataTypes) => {
     const Admin = sequelize.define("Admin", {
       name: {
@@ -26,3 +27,5 @@ module.exports = (sequelize, DataTypes) => {
   
     return Admin;
   };
+=======
+>>>>>>> 05e116f66a3c8b10511aa7b134dcd52b18a9da64
