@@ -8,12 +8,11 @@ app.use(cors());
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/UsersRoutes");
-const productRoutes=require('./routes/productRoutes')
+const productRoutes = require("./routes/productRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use('/api/products',productRoutes)
-
+app.use("/api/products", productRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
