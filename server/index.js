@@ -1,14 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const PORT = 8080;
+const express = require('express');
+const cors = require('cors');
 const app = express();
+const PORT = 8080;
 
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Welcome Home");
-});
+const authRoutes = require("./routes/authRoutes");
+
+app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);

@@ -17,13 +17,23 @@ db.Product = require("../models/product.js")(sequelize,DataTypes)
 
 
 
-sequelize.authenticate()
-  .sync({ force: true })
+sequelize
+  .authenticate()
   .then(() => {
-    console.log("phrase table created successfully!");
+    console.log("Database connected...");
   })
-  .catch((error) => {
-    console.error("Unable to create table : ", error);
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
   });
+
+// sequelize
+//   .sync({ force: true })
+//   .then(() => {
+//     console.log("Database & tables created!");
+//   })
+//   .catch((error) => {
+//     console.error("Error creating database & tables:", error);
+//   });
+
 
 module.exports=db;
