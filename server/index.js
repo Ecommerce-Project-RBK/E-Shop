@@ -1,10 +1,18 @@
 const express = require("express");
 const cors = require("cors");
-const PORT = 8080;
 const app = express();
-require("./database/index.js")
+const PORT = 8080;
+
 app.use(express.json());
 app.use(cors());
+
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/UsersRoutes");
+const productRoutes=require('./routes/productRoutes')
+
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use('/api/products',productRoutes)
 
 
 app.listen(PORT, () => {
