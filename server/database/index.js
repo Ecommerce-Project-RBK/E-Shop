@@ -5,8 +5,6 @@ const sequelize = new Sequelize("eshop", "root", "root", {
   dialect: "mysql",
 });
 
-
-
 const db={};
 db.Sequelize=Sequelize
 db.sequelize=sequelize
