@@ -1,4 +1,3 @@
-
 module.exports=(sequelize,DataTypes) =>{
     const  Product =  sequelize.define('Product', {
         name: 
@@ -18,7 +17,7 @@ module.exports=(sequelize,DataTypes) =>{
            allowNull: true },
            stock:{
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             defaultValue: 0,
          
            }

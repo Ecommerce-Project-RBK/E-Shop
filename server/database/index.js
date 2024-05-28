@@ -1,11 +1,9 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize("eshop", "Selim", "Maken_wochen987", {
+const sequelize = new Sequelize("eshop", "root", "root", {
   host: "localhost",
   dialect: "mysql",
 });
-
-
 
 const db={};
 db.Sequelize=Sequelize
@@ -26,14 +24,12 @@ sequelize
     console.error("Unable to connect to the database:", err);
   });
 
-// sequelize
-//   .sync({ force: true })
+// sequelize.sync({ force: true }) 
 //   .then(() => {
-//     console.log("Database & tables created!");
+//     console.log("Tables created successfully!");
 //   })
 //   .catch((error) => {
-//     console.error("Error creating database & tables:", error);
+//     console.error("Unable to create tables:", error);
 //   });
-
 
 module.exports=db;
