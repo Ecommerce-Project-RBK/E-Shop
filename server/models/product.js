@@ -1,6 +1,4 @@
-
-
-module.exports=(sequelize,Datatypes) =>{
+module.exports=(sequelize,DataTypes) =>{
     const  Product =  sequelize.define('Product', {
         name: 
         { type: DataTypes.STRING,
@@ -19,7 +17,7 @@ module.exports=(sequelize,Datatypes) =>{
            allowNull: true },
            stock:{
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             defaultValue: 0,
          
            }
