@@ -15,6 +15,7 @@ db.Product = require("../models/product.js")(sequelize,DataTypes)
 
 
 
+
 sequelize
   .authenticate()
   .then(() => {
@@ -24,12 +25,12 @@ sequelize
     console.error("Unable to connect to the database:", err);
   });
 
-// sequelize.sync({ force: true }) 
-//   .then(() => {
-//     console.log("Tables created successfully!");
-//   })
-//   .catch((error) => {
-//     console.error("Unable to create tables:", error);
-//   });
+sequelize.sync({ force: true }) 
+  .then(() => {
+    console.log("Tables created successfully!");
+  })
+  .catch((error) => {
+    console.error("Unable to create tables:", error);
+  });
 
 module.exports=db;

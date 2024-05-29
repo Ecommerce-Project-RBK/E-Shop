@@ -9,10 +9,12 @@ app.use(cors());
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/UsersRoutes");
 const productRoutes=require('./routes/productRoutes')
+const profileBuyer=require("./routes/createProfileBuyer")
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use('/api/products',productRoutes)
+app.use("/api/Buyer", profileBuyer);
 
 
 app.listen(PORT, () => {
