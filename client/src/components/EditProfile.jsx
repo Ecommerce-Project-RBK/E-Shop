@@ -12,7 +12,9 @@ const EditProfile = () => {
   const [confirmpassword,setConfirmpassword] = useState(newpassword)
 
   return (
+
     <div>
+      
 <div className="breadcrumb">Home / My Account</div> <div className='welcome'>Welcome! Aziz Chinguiti</div>
             <div className="container">
                 <div className="sidebar">
