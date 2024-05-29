@@ -13,6 +13,7 @@ db.Buyer = require("../models/buyer.js")(sequelize, DataTypes);
 db.Seller = require("../models/seller.js")(sequelize, DataTypes);
 db.Product = require("../models/product.js")(sequelize, DataTypes);
 
+
 sequelize
   .authenticate()
   .then(() => {
