@@ -11,11 +11,13 @@ const userRoutes = require("./routes/UsersRoutes");
 const productRoutes=require('./routes/productRoutes');
 const profileSeller=require("./routes/ProfileSellerRoutes.js")
 
+const profileBuyer=require("./routes/createProfileBuyer")
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use('/api/products',productRoutes);
 app.use("/api/seller", profileSeller);
+app.use("/api/Buyer", profileBuyer);
 
 
 app.listen(PORT, () => {
