@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Signup.css";
+import "../CSS/Login.css";
 
-const SignUp = () => {
-  const [name, setName] = useState("");
+const Login = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("buyer");
 
-  const handleSignUp = () => {
-    console.log("Signing up", { name, emailOrPhone, password, role });
+  const handleLogin = () => {
+    console.log("Logging in", { emailOrPhone, password });
   };
 
   return (
-    <div className="signup-page">
+    <div className="login-page">
       <header className="header">
         <div className="top-banner">
           Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!{" "}
@@ -22,29 +20,23 @@ const SignUp = () => {
         <nav className="main-nav">
           <div className="logo">Exclusive</div>
           <div className="nav-links">
-            <Link to="/home">Home</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/about">About</Link>
-            <Link to="/login">Login</Link>
+            <Link to="/">Home</Link>
+            <a href="#">Contact</a>
+            <a href="#">About</a>
+            <Link to="/signup">Sign Up</Link>
           </div>
           <div className="search-container">
             <input type="text" placeholder="What are you looking for?" />
           </div>
         </nav>
       </header>
-      <div className="signup-container">
+      <div className="login-container">
         <div className="image-section">
-          <img src="../src/images/login.png" alt="signup" />
+          <img src="../src/images/login.png" alt="Login" />
         </div>
         <div className="form-section">
-          <h2>Create an account</h2>
+          <h2>Log in to Exclusive</h2>
           <p>Enter your details below</p>
-          <input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
           <input
             type="text"
             placeholder="Email or Phone Number"
@@ -57,14 +49,9 @@ const SignUp = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="buyer">Buyer</option>
-            <option value="seller">Seller</option>
-          </select>
-          <button onClick={handleSignUp}>Create Account</button>
-          <button>Sign up with Google</button>
+          <button onClick={handleLogin}>Log In</button>
           <p>
-            Already have an account? <Link to="/login">Log in</Link>
+            <a>Forgot Password?</a>
           </p>
         </div>
       </div>
@@ -139,4 +126,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
