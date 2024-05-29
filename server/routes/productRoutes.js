@@ -1,21 +1,20 @@
-// routes/productRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const productController = require('../controller/productController');
+const productController = require("../controller/productController");
+const jwtMiddleware = require("../middleware/jwtMiddleware");
 
-// Create a new product
-router.post('/create', createProduct);
+// post a product (protected because its a seller feature)
+router.post("/create", jwtMiddleware, productController.createProduct);
 
-// Get all products
-router.get('/get', getAllProducts);
+// get all products
+router.get("/get", productController.getAllProducts);
+// get one product
+router.get("/:id", productController.getProductById);
 
-// Get product by ID
-router.get('/:id', getProductById);
+// update a product (protected because its a seller feature)
+router.put("/:id", jwtMiddleware, productController.updateProduct);
 
-// Update product
-router.put('/:id', updateProduct);
-
-// Delete product
-router.delete('/:id',deleteProduct);
+// delete a produt (protected because its a seller feature)
+router.delete("/:id", jwtMiddleware, productController.deleteProduct);
 
 module.exports = router;
