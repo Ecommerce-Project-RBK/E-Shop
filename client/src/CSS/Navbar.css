@@ -1,0 +1,56 @@
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-banner {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.top-banner a {
+    color: white;
+    text-decoration: underline;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.main-nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.main-nav .nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav .nav-links a {
+    margin-left: 5px;
+  margin-right: 180px;
+    text-decoration: none;
+    color: black;
+}
+
+.main-nav .icons {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav .icons span {
+    margin-left: 10px;
+    font-size: 18px;
+}

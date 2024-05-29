@@ -15,6 +15,7 @@ db.Product = require("../models/product.js")(sequelize,DataTypes)
 
 
 
+
 sequelize
   .authenticate()
   .then(() => {
