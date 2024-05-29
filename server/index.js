@@ -1,3 +1,4 @@
+
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -18,5 +19,5 @@ app.use("/api/seller", profileSeller);
 
 
 app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`);
+  console.log(`Server listening at http://localhost:${PORT}`); 
 });
