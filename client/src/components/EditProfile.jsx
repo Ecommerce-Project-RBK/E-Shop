@@ -1,8 +1,8 @@
 import React, { useState }  from 'react'
 import '../CSS/EditProfile.css'
 import axios from 'axios'
-
 const EditProfile = () => {
+
   const [firstname,setFirstname] = useState("")
   const [lastname,setLastname] = useState("")
   const [email,setEmail] = useState("")
@@ -13,6 +13,7 @@ const EditProfile = () => {
 
   return (
     <div>
+        
 <div className="breadcrumb">Home / My Account</div> <div className='welcome'>Welcome! Aziz Chinguiti</div>
             <div className="container">
                 <div className="sidebar">
