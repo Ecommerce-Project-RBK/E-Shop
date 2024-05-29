@@ -3,12 +3,20 @@ const {
   getAllUsers,
   getUserByEmail,
   deleteUser,
+  editUserRole,
 } = require("../controller/UsersController");
+const jwtMiddleware = require("../middleware/jwtMiddleware");
 
 const router = express.Router();
+// all these routes are protected because they are admin features
 
-router.get("/getAll", getAllUsers);
-router.get("/getOne/:email", getUserByEmail);
-router.delete("/delete/:email", deleteUser);
+// get all users
+router.get("/getAll", jwtMiddleware, getAllUsers);
+// get one user by his email
+router.get("/getOne/:email", jwtMiddleware, getUserByEmail);
+// delete a user by his email
+router.delete("/delete/:email", jwtMiddleware, deleteUser);
+// update/change user's role
+router.put("/updRole", jwtMiddleware, editUserRole);
 
 module.exports = router;
