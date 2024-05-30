@@ -5,8 +5,16 @@ const Product = db.Product;
 // Create a new product
 createProduct = async (req, res) => {
     try {
-        const { name, price, category, description, image, stock } = req.body;
-        const newProduct = await Product.create({ name, price, category, description, image, stock });
+        const { name, price, category, description, image, stock, sales } = req.body;
+        const newProduct = await Product.create({ 
+            name, 
+            price, 
+            category, 
+            description, 
+            image, 
+            stock, 
+            sales 
+        });
         res.status(201).json(newProduct);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -67,11 +75,28 @@ deleteProduct = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+  // it will fetch the product by the best seles 
+const getBestSellers = async (req, res) => {
+    try {
+        const sales = await Product.findAll({
+
+            order: [['sales', 'DESC']],
+            //order mean that the products will be stortes by seles;
+            //DESC:stands for "descending". It means that 
+            //the results should be sorted in descending order;
+            limit: 2, 
+        });
+        res.json(sales);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
 
 module.exports={
     createProduct,
     getAllProducts,
     getProductById,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getBestSellers,
 }
