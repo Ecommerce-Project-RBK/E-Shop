@@ -66,6 +66,7 @@ const AdminDashboard = () => {
             <table>
               <thead>
                 <tr>
+                <th>Product</th>
                   <th>Seller</th>
                   <th>Email</th>
                   <th>Phone Number</th>
@@ -73,6 +74,7 @@ const AdminDashboard = () => {
               </thead>
               <tbody>
                 <tr>
+                <td>product name </td>
                   <td>seller name </td>
                   <td>seller email</td>
                   <td>666</td>
