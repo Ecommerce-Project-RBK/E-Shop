@@ -72,6 +72,10 @@ const editUserRole = async (req, res) => {
           email: user.email,
           phoneNumber: user.phoneNumber,
           password: user.password,
+          firstname:user.firstname, 
+          lastname:user.lastname,
+        
+
         });
         /// then we destroy(delete) the user info from the previous table (in this case in the seller table )
         await user.destroy();
