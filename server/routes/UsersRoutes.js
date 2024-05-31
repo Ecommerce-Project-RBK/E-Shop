@@ -3,8 +3,9 @@ const {
   getAllUsers,
   getUserByEmail,
   deleteUser,
-  editUserRole,
+  
 } = require("../controller/UsersController");
+const{changeUserRole}=require("../controller/authController")
 const jwtMiddleware = require("../middleware/jwtMiddleware");
 
 const router = express.Router();
@@ -17,6 +18,6 @@ router.get("/getOne/:email", jwtMiddleware, getUserByEmail);
 // delete a user by his email
 router.delete("/delete/:email", jwtMiddleware, deleteUser);
 // update/change user's role
-router.put("/updRole", jwtMiddleware, editUserRole);
+router.put("/change-role", jwtMiddleware,changeUserRole);
 
 module.exports = router;

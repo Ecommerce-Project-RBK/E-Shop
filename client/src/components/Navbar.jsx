@@ -10,10 +10,10 @@ const Navbar = () => {
                 <nav className="main-nav">
                     <div className="logo">Exclusive</div>
                     <div className="nav-links">
-                        <a href="#">Home</a>
-                        <a href="#">Contact</a>
-                        <a href="#">About</a>
-                        <a href="#">Sign Up</a>
+                        <a href="/home">Home</a>
+                        <a href="/contact">Contact</a>
+                        <a href="/about">About</a>
+                        <a href="/signup">Sign Up</a>
                         <input type="text" placeholder="What are you looking for?" />
                         <div className="icons">
                             <span>❤️</span>

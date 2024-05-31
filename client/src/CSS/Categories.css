@@ -1,0 +1,65 @@
+.categories {
+    text-align: center;
+    padding: 20px;
+    margin-top: -10px;
+  }
+  
+  .categories h2 {
+    color: rgb(249, 126, 10);
+  }
+  
+  .categories h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .category-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top:100px ;
+  }
+  
+  .category {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .category:hover {
+    background-color: red;
+    color: white;
+  }
+  
+  .category.active {
+    background-color: red;
+    color: white;
+  }
+  .category-heading {
+    display: inline-flex;
+    align-items: center;
+    margin-left: -1000px;
+  }
+  
+  .category-heading img {
+    width: 15px; /* Adjust as needed */
+    height: auto;
+    margin-left: 0; /* Adjust spacing between the image and the heading */
+    border-radius: 5px;
+    margin-bottom: -20px;
+  }
+  .title-category{
+
+    margin-left: -740px; 
+   
+  }
+  
+  .category-heading h2 {
+    font-size: 20px; /* Adjust as needed */
+    margin-bottom: -20px;
+    margin-left: 0; /* Adjust to position the heading on the far left */
+  }
+  

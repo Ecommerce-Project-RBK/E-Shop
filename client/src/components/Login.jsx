@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+
+import axios from "axios";
 import "../CSS/Login.css";
+import { Link,useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
+ const navigate=useNavigate()
 
-  const handleLogin = () => {
-    console.log("Logging in", { emailOrPhone, password });
+  const handleLogin = async () => {
+    try {
+      const payload = { email: emailOrPhone, password };
+      const endpoint = "http://localhost:8080/api/auth/login";
+
+      const response = await axios.post(endpoint, payload);
+      console.log("Login successful", response.data);
+    } catch (error) {
+      console.error("Login error", error);
+    }
   };
 
   return (
@@ -21,7 +32,7 @@ const Login = () => {
           <div className="logo">Exclusive</div>
           <div className="nav-links">
             <Link to="/">Home</Link>
-            <a href="#">Contact</a>
+            <a href="/contact">Contact</a>
             <a href="#">About</a>
             <Link to="/signup">Sign Up</Link>
           </div>
@@ -49,9 +60,9 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={handleLogin}>Log In</button>
+          <button onClick={()=>{handleLogin(),navigate("/editProfil")}}>Log In</button>
           <p>
-            <a>Forgot Password?</a>
+            <a href="#">Forgot Password?</a>
           </p>
         </div>
       </div>
