@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CSS/EditProfile.css';
 import axios from 'axios';
 import Navbar from './Navbar';
 import Footer from './Footer';
-// import { useLocation } from "react-router-dom";
 
 const EditProfile = () => {
   const [firstname, setFirstname] = useState("");
@@ -13,36 +12,36 @@ const EditProfile = () => {
   const [password, setPassword] = useState("");
   const [newpassword, setNewpassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); // State for error message
-  const [refresh, setrefresh] = useState(false);
-  const [welcome, setwelcome] = useState("");
-  // const location=useLocation()
-  // console.log(location)
-  //   const name=location.state.name || "user"
- 
+  const [errorMessage, setErrorMessage] = useState(""); 
+  const [refresh, setRefresh] = useState(false);
+  const [welcome, setWelcome] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1])); 
+      setWelcome(`Welcome ${decodedToken.name}!`); 
+    }
+  }, []);
 
   const confirmpass = () => {
     if (newpassword !== confirmpassword) {
-      setErrorMessage("New password and confirm password do not match."); // Set error message
+      setErrorMessage("New password and confirm password do not match."); 
       return;
     }
 
-    axios.put('http://localhost:8080/api/Buyer/profile/update',{
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        address: address,
-        password: password,
-        newPassword: newpassword
+    axios.put('http://localhost:8080/api/Buyer/profile/update', {
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      address: address,
+      password: password,
+      newPassword: newpassword
     })
       .then(response => {
         console.log(response.data);
-        // alert("Profile updated successfully!");
-        setrefresh(!refresh)
-        setwelcome(response.data.firstname)
-        console.log(welcome)
-        console.log(response)
-
+        setRefresh(!refresh)
+        setWelcome(`Welcome ${response.data.firstname}!`);
       })
       .catch(error => {
         console.error(error);
@@ -52,9 +51,9 @@ const EditProfile = () => {
 
   return (
     <div>
-      <Navbar/>
-      <div className="breadcrumb">Home / My Account</div>
-      <div className='welcome'>Welcome ! </div>
+      <Navbar />
+      <div className="aziz-breadcrumb">Home / My Account</div>
+      <div className='welcome'>{welcome}</div> 
       <div className="container">
         <div className="sidebar">
           <div className="sidebar-section">
@@ -132,14 +131,14 @@ const EditProfile = () => {
               />
               {errorMessage && <p className="error-message">{errorMessage} <img src="https://www.freeiconspng.com/uploads/error-icon-4.png" alt="" width={17}/></p>} 
             </div>
-            <div className="form-actions">
-              <button type="button" className="cancelButton">Cancel</button>
-              <button type="button" className="saveButton" onClick={() => confirmpass()}>Save Changes</button>
+            <div className="aziz-form-actions">
+              <button type="button" className="aziz-cancelButton">Cancel</button>
+              <button type="button" className="aziz-saveButton" onClick={() => confirmpass()}>Save Changes</button>
             </div>
           </form>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

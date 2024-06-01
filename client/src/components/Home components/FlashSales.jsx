@@ -1,49 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../CSS/FlashSales.css';
-
-import Navbar from '../Navbar'
+import axios from 'axios';
+import Navbar from '../Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const FlashSales = () => {
-  return ( 
-  <div>
-    <Navbar />
-   <div className="flash-sales">
-  <div className="products">
-         <div className="product">
-          <img src="https://www.zdnet.com/a/img/resize/7e4afb161fcd6f6054150979e101e0488aca68f0/2023/09/13/7b4446f4-c204-4e26-991f-cba6241049ff/apple-watch-ultra-2-2.jpg?auto=webp&fit=crop&frame=1&height=238.5&width=459" alt="HAVIT HV-G92 Gamepad" />
-          <span className="discount">-40%</span>
-          <h3>HAVIT HV-G92 Gamepad</h3>
-          <button>Add To Cart</button>
-          <p>$120 <span>$160</span></p>
-          <p>★★★★☆ (88)</p>
-        </div>
-        <div className="product">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVhdigZh7umQZYCw7OUmE5CHBvPGvskHdN5GXGMCnUvaxC7kNXP6usx-8OECvIYLDP804&usqp=CAU" alt="AK-900 Wired Keyboard" />
-          <span className="discount">-35%</span>
-          <h3>AK-900 Wired Keyboard</h3>
-          <button>Add To Cart</button>
-          <p>$960 <span>$1160</span></p>
-          <p>★★★★☆ (75)</p>
-        </div>
-        <div className="product">
-          <img src="https://i.pinimg.com/1200x/c8/76/5b/c8765baf0327f6e1ac192512ee952dd7.jpg" alt="IPS LCD Gaming Monitor" />
-          <span className="discount">-30%</span>
-          <h3>IPS LCD Gaming Monitor</h3>
-          <button>Add To Cart</button>
-          <p>$370 <span>$400</span></p>
-          <p>★★★★★ (99)</p>
-        </div>
-        <div className="product">
-          <img src="https://www.zdnet.com/a/img/resize/fdf7c55748fa270940bbd0ead1e7a4fa76f286d8/2023/09/13/93684380-3eff-48ab-aae0-b0aa58033af6/apple-watch-ultra-2-4.jpg?auto=webp&fit=crop&height=900&width=1200" alt="S-Series Comfort Chair" />
-          <span className="discount">-25%</span>
-          <h3>S-Series Comfort Chair</h3>
-          <button>Add To Cart</button>
-          <p>$375 <span>$400</span></p>
-          <p>★★★★☆ (99)</p>
-        </div>
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [addedToCart, setAddedToCart] = useState({});
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/products/getAll')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.log('Error fetching the product:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // Load cart items from localStorage on component mount
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const addedToCartObj = cartItems.reduce((acc, item) => {
+      acc[item.id] = true;
+      return acc;
+    }, {});
+    setAddedToCart(addedToCartObj);
+  }, []);
+
+  const addToCart = (product) => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const existingItem = cartItems.find(item => item.id === product.id);
+    if (!existingItem) {
+      cartItems.push(product);
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      setAddedToCart(prevState => ({
+        ...prevState,
+        [product.id]: true
+      }));
+    } else {
+      console.log(`Product with ID ${product.id} is already in the cart.`);
+    }
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div className="flash-sales">
+        {data.map((el) => (
+          <div className="products" key={el.id}>
+            <div className="product">
+              <img onClick={() => { navigate('/oneproduct', { state: { id: el.id } }); }} src={el.image} alt={el.name} />
+              <span className="discount">-40%</span>
+              <h3>{el.name}</h3>
+              <button onClick={() => addToCart(el)} disabled={addedToCart[el.id]}> {/* Disable button if item is already added */}
+                {addedToCart[el.id] ? 'Added to Cart' : 'Add To Cart'} {/* Change button text based on addedToCart state */}
+              </button>
+              <p><span>{el.price}</span></p>
+              <p>★★★★☆ (88)</p>
+            </div>
+          </div>
+        ))}
       </div>
-      <button className="view-all">View All Products</button>
-    </div>
     </div>
   );
 };

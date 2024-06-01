@@ -38,8 +38,8 @@
   }
 
   .view-all-button {
-    margin-left: 1300px;
- 
+    margin-left: 1200px;
+ width: 15%;
     background: #ff4d4d;
     color: white;
     border: none;
@@ -61,9 +61,9 @@
   }
   
   .product img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+    width: 250px;
+    height: 200px;
+    object-fit:fill;
   }
   
   .icons2 {

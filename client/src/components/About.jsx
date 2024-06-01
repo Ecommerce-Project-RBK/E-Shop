@@ -87,7 +87,7 @@ const About = () => {
           </p>
         </div>
         <div className="image-section">
-          <img src="https://tailieutienganh.edu.vn/public/files/upload/default/images/Shopping-1.jpg" alt="Our Story" />
+          <img src="https://i.pinimg.com/originals/f6/2e/c3/f62ec33251d6e4f1555cdfbd53acadbe.gif" alt="Our Story" />
         </div>
       </div>
       <div className="stats-section">
@@ -122,7 +122,7 @@ const About = () => {
           </div>
         </div>
         <div className="team-member">
-          <img src={image2} alt="Emma Watson" />
+          <img src={image2} alt="Scrum" />
           <p className="name">Aziz chinguiti</p>
           <p className="position">Managing Director</p>
           <div className="social-icons">
@@ -134,7 +134,7 @@ const About = () => {
           </div>
         </div>
         <div className="team-member">
-          <img src={image3} alt="Will Smith" />
+          <img src={image3} alt="member" />
           <p className="name">Raslen Bouallueg</p>
           <p className="position">Product Designer</p>
           <div className="social-icons">

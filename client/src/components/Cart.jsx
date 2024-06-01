@@ -1,66 +1,112 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../CSS/Cart.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const Cart = () => {
-  return (<div>
-    <Navbar/>
-    <div className="cart-container">
-      <table className="cart-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="product-details">
-              <img src="https://th.bing.com/th/id/OIP.wqNcJRp9rIs6-eHreAY8agHaGH?rs=1&pid=ImgDetMain" alt="LCD Monitor" className="product-image"  />
-              <span className="product-name"> <b>LCD Monitor</b></span>
-            </td>
-            <td><b>$650</b></td>
-            <td>
-              <div className="quantity-control">
-                <input type="number" value="1" min="1" />
-              </div>
-            </td>
-            <td><b>$650</b></td>
-          </tr>
-          <tr>
-            <td className="product-details">
-              <img src="https://sm.ign.com/t/ign_br/photo/default/controller3-1671500852260_ue3j.1080.jpg" alt="H4 Gamepad" className="product-image" />
-              <span className="product-name"> <b>H4 Gamepad</b></span>
-            </td>
-            <td><b>$550</b></td>
-            <td>
-              <div className="quantity-control">
-                <input type="number" value="2" min="1" />
-              </div>
-            </td>
-            <td><b>$1100</b></td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="cart-actions">
-        <button className="return-shop">Return to Shop</button>
-        <button className="update-cart">Update Cart</button>
+  const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate();
+  const[name,setname]=useState("")
+  const[price,setprice]=useState("")
+  const[cat,setcat]=useState("")
+  const[nae,setna]=useState("")
+  
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const items = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+
+
+ const buy=()=>{
+  axios.post("http://localhost:8080/api/cart/add",{
+    nameOfproduct:name,
+    total:price,
+    category:cat,
+    username:nae
+
+  }).then((response)=>{console.log(response) 
+    // localStorage.removeItem("cartItems");
+  }).catch((err)=>{
+    console.log(err)
+   
+  })
+ }
+
+  useEffect(() => {
+    
+    setCartItems(items);
+    console.log(items)
+    const concatenatedName = items.map(item => item.name).join(',');
+    const concatenatedPrice = items.map(item => item.price).reduce((acc, price) => acc + price, 0)
+    const concatenatedCategory = items.map(item => item.category).join(',');
+
+    setname(concatenatedName);
+    setprice(concatenatedPrice);
+    setcat(concatenatedCategory);
+    setna(user.name);
+   
+   
+  }, []);
+
+  const delet = (index) => {
+    
+    const updatedCartItems = cartItems.slice(0, index).concat(cartItems.slice(index + 1));
+ 
+    setCartItems(updatedCartItems);
+    
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div className="cart-container">
+        <table className="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.map((item, index) => (
+              <tr key={index}>
+                <td className="product-details">
+                  <img src={item.image} alt={item.name} className="product-image" />
+                  <span className="product-name"><b>{item.name}</b></span>
+                </td>
+                <td><b>{item.price}</b></td>
+                <td>
+                  <div className="quantity-control">
+                    <input type="number" value="1" min="1" readOnly />
+                  </div>
+                </td>
+                <td><b>{item.price}</b></td>
+                <td>
+                  <button onClick={() => delet(index)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="cart-actions">
+          <button className="return-shop" onClick={() => { navigate("/home") }}>Return to Shop</button>
+          <button className="update-cart">Update Cart</button>
+        </div>
+        <div className="cart-total">
+          <p>Subtotal: ${cartItems.reduce((acc, item) => acc + item.price, 0)}</p>
+          <p>Shipping: Free</p>
+          <p>Total: ${cartItems.reduce((acc, item) => acc + item.price, 0)}</p>
+          <button className="checkout" onClick={()=>{buy()}}>Proceed to Checkout</button>
+        </div>
       </div>
-      <div className="coupon-section">
-        <input type="text" placeholder="Coupon Code" />
-        <button>Apply Coupon</button>
-      </div>
-      <div className="cart-total">
-        <p>Subtotal: $1750</p>
-        <p>Shipping: Free</p>
-        <p>Total: $1750</p>
-        <button className="checkout">Proceed to Checkout</button>
-      </div>
-    </div>
-    <Footer/>
+      <Footer />
     </div>
   );
 };

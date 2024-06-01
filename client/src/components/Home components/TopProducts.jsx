@@ -19,11 +19,11 @@ function TopProducts() {
         {products.map((product, index) => (
           <div className="product" key={index}>
             <img src={product.img} alt={product.name} />
-            <div className="icons2">
-              <span className="icon-heart2">❤️</span>
-              <span className="icon-eye">👁️</span>
-            </div>
             <h2>{product.name}</h2>
+            <div className="icons2">
+            <span className="icon-heart2">❤️</span>
+              <span className="icon-eye">👁️</span>
+              </div>
             <p className="price">
               <span className="current-price">{product.currentPrice}</span>
               <span className="original-price">{product.originalPrice}</span>
@@ -51,28 +51,28 @@ function TopProducts() {
 
 const products = [
   {
-    img: 'https://katemiddletonstyle.org/wp-content/uploads/2021/03/maxco-runaway-pink-coat.jpg',
+    img: 'https://t4.ftcdn.net/jpg/03/08/69/75/360_F_308697506_9dsBYHXm9FwuW0qcEqimAEXUvzTwfzwe.jpg',
     name: 'The north coat',
     currentPrice: '$260',
     originalPrice: '$360',
     reviews: 65,
   },
   {
-    img: 'https://katemiddletonstyle.org/wp-content/uploads/2021/03/maxco-runaway-pink-coat.jpg',
+    img: 'https://st4.depositphotos.com/13349494/26799/i/450/depositphotos_267998854-stock-photo-woman-virtual-reality-headset-pointing.jpg',
     name: 'Gucci duffle bag',
     currentPrice: '$960',
     originalPrice: '$1160',
     reviews: 65,
   },
   {
-    img: 'https://katemiddletonstyle.org/wp-content/uploads/2021/03/maxco-runaway-pink-coat.jpg',
+    img: 'https://cdsassets.apple.com/live/7WUAS350/images/social/apple-tv-4k-pair-bluetooth-beats-keyboard-social-card.jpg',
     name: 'RGB liquid CPU Cooler',
     currentPrice: '$160',
     originalPrice: '$170',
     reviews: 65,
   },
   {
-    img: 'https://katemiddletonstyle.org/wp-content/uploads/2021/03/maxco-runaway-pink-coat.jpg',
+    img: 'https://fs.npstatic.com/userfiles/7734655/image/Beats-Solod-4-headphones-bluetooth-specs-price-launch-w810h462.png',
     name: 'Small BookSelf',
     currentPrice: '$360',
     originalPrice: '',

@@ -3,6 +3,9 @@ import FlashSales from './Home components/FlashSales.jsx';
 import Categories from './Home components/Categories.jsx';
 import '../CSS/HomePage.css';
 import TopProducts from './Home components/TopProducts.jsx';
+import Features from './Home components/Features.jsx';
+import FeaturedProducts from './Home components/FeaturedProducts .jsx';
+import Footer from './Footer.jsx';
 
 
 const HomePage = () => {
@@ -12,6 +15,9 @@ const HomePage = () => {
       <FlashSales />
       <Categories />
       <TopProducts />
+      <FeaturedProducts  />
+      <Features />
+      <Footer />
     </div>
   );
 };

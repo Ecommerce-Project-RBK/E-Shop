@@ -3,23 +3,48 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../CSS/Login.css";
 import { Link,useNavigate } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode'; 
 
 const Login = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [tokn,settokn]=useState("")
+  
+
  const navigate=useNavigate()
+ //PS: aziz and ahmed changed the handleLogin to extract the token in editprofil to use it contents to display username and login using the role 
+ const handleLogin = async () => {
+  try {
+    const payload = { email: emailOrPhone, password };
+    const endpoint = "http://localhost:8080/api/auth/login";
 
-  const handleLogin = async () => {
-    try {
-      const payload = { email: emailOrPhone, password };
-      const endpoint = "http://localhost:8080/api/auth/login";
+    const response = await axios.post(endpoint, payload);
+    const token = response.data.token; // Assuming your token is in response.data.token
+    localStorage.setItem("token", token); // Store the token in local storage
+    console.log("Login successful", response.data);
+    navigate("/editProfil"); // Redirect to editProfile after successful login
+  } catch (error) {
+    console.error("Login error", error);
+  }
+};
 
-      const response = await axios.post(endpoint, payload);
-      console.log("Login successful", response.data);
-    } catch (error) {
-      console.error("Login error", error);
-    }
-  };
+  // const handleLogin = async () => {
+  //   try {
+  //     const payload = { email: emailOrPhone, password };
+  //     const endpoint = "http://localhost:8080/api/auth/login";
+
+  //     const response = await axios.post(endpoint, payload);
+  //     console.log("Login successful", response.data);
+
+  // const parsedToken = jwtDecode(response.data.token);
+  //     localStorage.setItem("user", JSON.stringify(parsedToken)); 
+  //     const user = JSON.parse(localStorage.getItem("user"));
+       
+  //    console.log("User hatha:", user);
+  //   } catch (error) {
+  //     console.error("Login error", error);
+  //   }
+  // };
 
   return (
     <div className="login-page">
@@ -33,7 +58,7 @@ const Login = () => {
           <div className="nav-links">
             <Link to="/">Home</Link>
             <a href="/contact">Contact</a>
-            <a href="#">About</a>
+            <a href="/about">About</a>
             <Link to="/signup">Sign Up</Link>
           </div>
           <div className="search-container">

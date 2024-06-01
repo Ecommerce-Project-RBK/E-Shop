@@ -24,7 +24,7 @@ const Footer = () => {
             <a href="/login">Login / Register</a>
           </p>
           <p>
-            <a href="#">Cart</a>
+            <a href="/cart">Cart</a>
           </p>
           <p>
             <a href="#">Wishlist</a>
@@ -67,7 +67,7 @@ const Footer = () => {
           <a href="#">LinkedIn</a>
         </div>
         <div className="copyright">
-          &copy; Copyright Ahmed 2022. All right reserved
+          &copy; Copyright 2024. All right reserved
         </div>
       </footer>
     </div>
