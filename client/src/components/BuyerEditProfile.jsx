@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
 
-const EditProfile = () => {
+const BuyerEditProfile = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -60,7 +60,7 @@ const EditProfile = () => {
       <div className="container">
         <div className="sidebar">
           <div className="sidebar-section">
-            <h4 onClick={() => navigate('/add')}>Add Product</h4>
+            
             <ul>
               <li className="active">My Profile</li>
               <li>Address Book</li>
@@ -141,4 +141,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default BuyerEditProfile;

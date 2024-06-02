@@ -23,7 +23,7 @@ const SignUp = () => {
 
       const response = await axios.post(endpoint, payload);
       console.log("Signup successful", response.data);
-      navigate("/editProfil")
+      navigate("/login")
     } catch (error) {
       console.error("Signup error", error);
     }

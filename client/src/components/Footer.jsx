@@ -18,19 +18,19 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Account</h3>
           <p>
-            <a href="#">My Account</a>
+            <a href="/editProfil">My Account</a>
           </p>
           <p>
-            <a href="#">Login / Register</a>
+            <a href="/login">Login / Register</a>
           </p>
           <p>
-            <a href="#">Cart</a>
+            <a href="/cart">Cart</a>
           </p>
           <p>
             <a href="#">Wishlist</a>
           </p>
           <p>
-            <a href="#">Shop</a>
+            <a href="/home">Shop</a>
           </p>
         </div>
         <div className="footer-section">
@@ -45,7 +45,7 @@ const Footer = () => {
             <a href="#">FAQ</a>
           </p>
           <p>
-            <a href="#">Contact</a>
+            <a href="/contact">Contact</a>
           </p>
         </div>
         <div className="footer-section">
@@ -67,7 +67,7 @@ const Footer = () => {
           <a href="#">LinkedIn</a>
         </div>
         <div className="copyright">
-          &copy; Copyright Ahmed 2022. All right reserved
+          &copy; Copyright 2024. All right reserved
         </div>
       </footer>
     </div>
