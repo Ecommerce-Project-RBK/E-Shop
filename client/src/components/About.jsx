@@ -16,7 +16,7 @@ const About = () => {
     const uploadPhoto1 = () => {
         const formData = new FormData()
         formData.append('file', file)
-        formData.append("upload_preset", "agenceFactory")
+        formData.append("upload_preset", "exclusive")
     
         axios.post(`https://api.cloudinary.com/v1_1/dcyeimdps/upload`, formData).then((response) => {
           console.log(response.data.secure_url)
@@ -30,7 +30,7 @@ const About = () => {
       const uploadPhoto2 = () => {
         const formData = new FormData()
         formData.append('file', file2)
-        formData.append("upload_preset", "agenceFactory")
+        formData.append("upload_preset", "exclusive")
     
         axios.post(`https://api.cloudinary.com/v1_1/dcyeimdps/upload`, formData).then((response) => {
           console.log(response.data.secure_url)
@@ -45,7 +45,7 @@ const About = () => {
         const formData = new FormData()
        formData.append('file', file3)
    
-        formData.append("upload_preset", "agenceFactory")
+        formData.append("upload_preset", "exclusive")
     
         axios.post(`https://api.cloudinary.com/v1_1/dcyeimdps/upload`, formData).then((response) => {
           console.log(response.data.secure_url)
@@ -58,7 +58,7 @@ const About = () => {
       const uploadPhoto4= () => {
         const formData = new FormData()
         formData.append('file', file4)
-        formData.append("upload_preset", "agenceFactory")
+        formData.append("upload_preset", "exclusive")
     
         axios.post(`https://api.cloudinary.com/v1_1/dcyeimdps/upload`, formData).then((response) => {
           console.log(response.data.secure_url)

@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../CSS/Navbar.css';
+import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 
 const Navbar = () => {
+  const [role, setRole] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setRole(decodedToken.role); 
+    }
+  }, []);
+
   const handleRedirect = (path) => {
-    window.location.href = path;
+    navigate(path);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
   return (
@@ -21,9 +40,13 @@ const Navbar = () => {
             <a href="/signup">Sign Up</a>
             <input type="text" placeholder="What are you looking for?" />
             <div className="icons">
-              <span onClick={() => handleRedirect('/contact')}>❤️</span>
-              <span onClick={() => handleRedirect('/cart')}>🛒</span>
-              <span onClick={() => handleRedirect('/editProfil')}>👤</span>
+            {role === 'buyer' &&  <span onClick={() => handleRedirect('/favorites')}>❤️</span>}
+              { role === 'buyer' &&  <span onClick={() => handleRedirect('/cart')}>🛒</span> }
+              { role === 'buyer' && <span onClick={() => handleRedirect('/buyerProfile')}>👤</span> }
+              {role === 'seller' && <span onClick={() => handleRedirect('/sellerProfile')}>👤</span>}
+              <span onClick={logout}>
+                <img src="../src/images/log-out.png" alt="Login Icon" className="icon-image" />
+              </span>
             </div>
           </div>
         </nav>

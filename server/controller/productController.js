@@ -1,8 +1,8 @@
-// controllers/productController.js
+
 const db = require('../database/index');
 const Product = db.Product;
 
-// Create a new product
+
 const createProduct = async (req, res) => {
     try {
         const { name, price, category, description, image, image1, image2, image3, stock } = req.body;
@@ -13,7 +13,7 @@ const createProduct = async (req, res) => {
     }
 };
 
-// Get all products
+// get all products
 const getAllProducts = async (req, res) => {
     try {
         const products = await Product.findAll();
@@ -23,7 +23,7 @@ const getAllProducts = async (req, res) => {
     }
 };
 
-// Get product by ID
+// get product by ID
 const getProductById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -49,21 +49,20 @@ const getProductsByCategory = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-// Update product
-// Update product
+
 const updateProduct = async (req, res) => {
     try {
         const { name, price, category, description, image, image1, image2, image3, stock }= req.body;
         const { name: oldName } = req.params;
 
-        // Find the product by its name
+   
         const product = await Product.findOne({ where: { name: oldName } });
         
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        // Update the product with the new details
+       
         await product.update({ name, price, category, description, image, image1, image2, image3, stock });
         res.status(200).json(product);
     } catch (error) {
@@ -72,12 +71,12 @@ const updateProduct = async (req, res) => {
 };
 
 
-// Delete product
+
 const deleteProduct = async (req, res) => {
     try {
         const { name } = req.params;
 
-        // Find the product by name instead of ID
+        
         const product = await Product.findOne({ where: { name: name } });
 
         if (!product) {

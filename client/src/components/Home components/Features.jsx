@@ -1,4 +1,4 @@
-// Features.js
+
 import React from 'react';
 import '../../CSS/Features.css'; // Make sure this file is in the same directory
 

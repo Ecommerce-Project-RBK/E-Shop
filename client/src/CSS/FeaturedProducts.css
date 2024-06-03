@@ -38,11 +38,12 @@
   
   .featured-item.large {
     grid-column: span 4;
+    margin-left: 500px;
   }
   
   .featured-item img {
     width: 423px;
-    height: 300px;
+    height: 400px;
     display: block;
   }
   

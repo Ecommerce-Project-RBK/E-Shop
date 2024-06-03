@@ -214,6 +214,19 @@
   background: #2c3e50;
 }
 
+.admin-customers-section table td .action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.admin-customers-section table td .action-buttons button {
+  margin-right: 5px;
+}
+
+.admin-customers-section table td .action-buttons button:last-child {
+  margin-right: 0;
+}
+
 .admin-customers-section table td button {
   background: #e74c3c;
   color: #ecf0f1;
@@ -223,12 +236,32 @@
   cursor: pointer;
 }
 
+.admin-customers-section table td button.switch-role {
+  background: #27ae60;
+  margin-left: 10px;
+}
+
 .admin-customers-section table td button:hover {
   background: #c0392b;
 }
+
+.admin-customers-section table td button.switch-role:hover {
+  background: #2ecc71;
+}
+
 .admin-products-section {
   width: 100%;
   padding: 20px;
+}
+
+.admin-products-section .admin-products-search-bar {
+  width: 100%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #7f8c8d;
+  margin-bottom: 20px;
+  background-color: #fff; 
+  color: #000; 
 }
 
 .admin-products-section table {
@@ -242,6 +275,11 @@
   border: 1px solid #7f8c8d;
   padding: 8px;
   text-align: left;
+}
+
+.admin-products-section table th:first-child,
+.admin-products-section table td:first-child {
+  width: 100px; 
 }
 
 .admin-products-section table th {
@@ -261,3 +299,121 @@
   background: #c0392b;
 }
 
+.admin-top-stock {
+  background: #34495e;
+  padding: 20px;
+  border-radius: 8px;
+  width: 65%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.admin-top-stock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-top-stock table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-top-stock table th,
+.admin-top-stock table td {
+  border: 1px solid #7f8c8d;
+  padding: 8px;
+  text-align: left;
+}
+
+.admin-top-stock table th {
+  background: #2c3e50;
+}
+
+
+.admin-orders-section {
+  width: 100%;
+  padding: 20px;
+}
+
+.admin-orders-search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #7f8c8d;
+  background-color: #fff; 
+  color: #000; 
+}
+
+.admin-orders-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-orders-section table th,
+.admin-orders-section table td {
+  border: 1px solid #7f8c8d;
+  padding: 8px;
+  text-align: left;
+}
+
+.admin-orders-section table th {
+  background: #2c3e50;
+}
+
+.admin-orders-section table td button {
+  background: #e74c3c;
+  color: #ecf0f1;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-orders-section table td button:hover {
+  background: #c0392b;
+}
+
+
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+.confirmation-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.confirmation-button {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirmation-button:hover {
+  background: #c0392b;
+}

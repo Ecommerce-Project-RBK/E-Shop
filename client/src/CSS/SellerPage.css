@@ -1,4 +1,4 @@
-/* src/CSS/SellerPage.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 .add-product-container {
@@ -104,13 +104,13 @@
 }
 
 .item-added-message {
-  background-color: #28e10c; /* Yellow color */
+  background-color: #28e10c; 
   color: white;
   padding: 15px;
   border-radius: 10px;
 
   margin-right:-430px; 
   text-align: center;
-  font-size: 20px; /* Bigger font size */
-  font-weight: bold; /* Bold font weight */
+  font-size: 20px; 
+  font-weight: bold; 
 }

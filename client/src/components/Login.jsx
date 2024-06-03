@@ -1,50 +1,43 @@
 import React, { useState } from "react";
-
 import axios from "axios";
 import "../CSS/Login.css";
-import { Link,useNavigate } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode'; 
+import { Link, useNavigate } from "react-router-dom";
+import {jwtDecode} from 'jwt-decode'; 
 
 const Login = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [tokn,settokn]=useState("")
-  
+  const navigate = useNavigate();
 
- const navigate=useNavigate()
- //PS: aziz and ahmed changed the handleLogin to extract the token in editprofil to use it contents to display username and login using the role 
- const handleLogin = async () => {
-  try {
-    const payload = { email: emailOrPhone, password };
-    const endpoint = "http://localhost:8080/api/auth/login";
+  const handleLogin = async () => {
+    try {
+      const payload = { email: emailOrPhone, password };
+      const endpoint = "http://localhost:8080/api/auth/login";
 
-    const response = await axios.post(endpoint, payload);
-    const token = response.data.token; // Assuming your token is in response.data.token
-    localStorage.setItem("token", token); // Store the token in local storage
-    console.log("Login successful", response.data);
-    navigate("/editProfil"); // Redirect to editProfile after successful login
-  } catch (error) {
-    console.error("Login error", error);
-  }
-};
+      const response = await axios.post(endpoint, payload);
+      const token = response.data.token; 
+      localStorage.setItem("token", token); // store the token in local storage
 
-  // const handleLogin = async () => {
-  //   try {
-  //     const payload = { email: emailOrPhone, password };
-  //     const endpoint = "http://localhost:8080/api/auth/login";
+      // new decode the token to extract user information
+      const decodedToken = jwtDecode(token);
+      console.log("Decoded Token:", decodedToken);
 
-  //     const response = await axios.post(endpoint, payload);
-  //     console.log("Login successful", response.data);
-
-  // const parsedToken = jwtDecode(response.data.token);
-  //     localStorage.setItem("user", JSON.stringify(parsedToken)); 
-  //     const user = JSON.parse(localStorage.getItem("user"));
-       
-  //    console.log("User hatha:", user);
-  //   } catch (error) {
-  //     console.error("Login error", error);
-  //   }
-  // };
+      // direct based on the user role
+      if (decodedToken.role === 'seller') {
+        navigate("/sellerProfile"); // seller profile
+      } else if (decodedToken.role === 'buyer') {
+        navigate("/buyerProfile"); // Redirect to buyer profile
+      } else if (decodedToken.role === 'admin')
+        { navigate("/admin"); }
+      else {
+        // other roles
+        console.log("Unknown role:", decodedToken.role);
+      }
+    } catch (error) {
+      console.error("Login error", error);
+      alert("Login failed. Please check your credentials and try again.");
+    }
+  };
 
   return (
     <div className="login-page">
@@ -85,7 +78,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={()=>{handleLogin(),navigate("/editProfil")}}>Log In</button>
+          <button onClick={handleLogin}>Log In</button>
           <p>
             <a href="#">Forgot Password?</a>
           </p>

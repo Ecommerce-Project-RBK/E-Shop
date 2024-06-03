@@ -1,48 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../CSS/TopProducts.css';
 
 function TopProducts() {
+  const calculateTimeLeft = () => {
+    const difference = +new Date('2024-12-31') - +new Date();
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+      };
+    }
+
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="Top">
-      <div className='head'>
-     
+      <div className='head'></div>
       
-   
+      <div className="top-label2-no" style={{ display: 'flex', alignItems: 'center' }}>
+        <img 
+          src="https://www.clker.com/cliparts/3/R/3/7/W/R/orange-vertical-rectangle-md.png" 
+          alt="IPS LCD Gaming Monitor" 
+          style={{ width: '20px', height: 'auto', marginRight: '10px' }} 
+        />
+        <h2 className='top-subtitle-no'>This Month</h2>
       </div>
-      <div className="top-label2" style={{ display: 'flex', alignItems: 'center' }}>
-  <img src="https://www.clker.com/cliparts/3/R/3/7/W/R/orange-vertical-rectangle-md.png" alt="IPS LCD Gaming Monitor" style={{ width: '20px', height: 'auto', marginRight: '10px' }} />
-  <h2 className='top-subtitle'>This Month</h2>
-</div>
 
-      <h1 className='top-prod'>Top Products</h1>     <button className="view-all-button">View All</button>
-      <section className="products">
-        {products.map((product, index) => (
-          <div className="product" key={index}>
-            <img src={product.img} alt={product.name} />
-            <h2>{product.name}</h2>
-            <div className="icons2">
-            <span className="icon-heart2">❤️</span>
-              <span className="icon-eye">👁️</span>
-              </div>
-            <p className="price">
-              <span className="current-price">{product.currentPrice}</span>
-              <span className="original-price">{product.originalPrice}</span>
-            </p>
-            <div className="rating">
-              <span className="stars">★★★★★</span>
-              <span className="reviews">({product.reviews})</span>
-            </div>
-          </div>
-        ))}
-      </section>
+      <h1 className='top-prod-no'>Top Products</h1>     
+    
+      
       <section className="music-experience">
         <h2>Enhance Your Music Experience</h2>
         <div className="timer">
-          <div>23 Hours</div>
-          <div>05 Days</div>
-          <div>59 Minutes</div>
-          <div>35 Seconds</div>
+        
+          <div>{timeLeft.hours} Hours</div>
+          <div>{timeLeft.minutes} Minutes</div>
+          <div>{timeLeft.seconds} Seconds</div>
         </div>
+        <img src="../src/images/jbl.png" alt="Music Experience" />
         <button className="buy-now">Buy Now!</button>
       </section>
     </div>

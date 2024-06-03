@@ -1,9 +1,10 @@
-// src/components/SellerPage.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../CSS/SellerPage.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SellerPage = () => {
   const [name, setName] = useState("");
@@ -14,8 +15,11 @@ const SellerPage = () => {
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
+  const [file, setFile] = useState(null);
+  const [file1, setFile1] = useState(null);
+  const [file2, setFile2] = useState(null);
+  const [file3, setFile3] = useState(null);
   const [stock, setStock] = useState("");
-  const [itemAdded, setItemAdded] = useState(false); 
 
   const handleStockChange = (e) => {
     if (e.target.value < 0) {
@@ -26,7 +30,25 @@ const SellerPage = () => {
     }
   };
 
-  function addProduct() {
+  const uploadPhoto = (e, fileSetter, imageSetter) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', fileSetter);
+    formData.append("upload_preset", "exclusive");
+
+    axios.post(`https://api.cloudinary.com/v1_1/dcyeimdps/upload`, formData)
+      .then((response) => {
+        console.log(response.data.secure_url);
+        imageSetter(response.data.secure_url);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("An error occurred while uploading the photo.");
+      });
+  };
+
+  const addProduct = (e) => {
+    e.preventDefault();
     axios.post("http://localhost:8080/api/products/create", {
       name: name,
       price: price,
@@ -40,12 +62,12 @@ const SellerPage = () => {
     })
     .then((response) => { 
       console.log("result", response); 
-      setItemAdded(true); // Set itemAdded state to true
-      setTimeout(() => {
-        setItemAdded(false); // Reset itemAdded state after 3 seconds
-      }, 3000);
+      toast.success("Product added successfully!");
     })
-    .catch((error) => { console.log("result", error); });
+    .catch((error) => { 
+      console.log("result", error); 
+      toast.error("An error occurred while adding the product.");
+    });
   }
 
   return (
@@ -74,29 +96,33 @@ const SellerPage = () => {
           </div>
           <div className="add-form-group">
             <label>Image:</label>
-            <input type="text" name="image" onChange={(e) => { setImage(e.target.value) }} />
+            <input type="file" name="image" onChange={(e) => { setFile(e.target.files[0]) }} />
+            <button onClick={(e) => uploadPhoto(e, file, setImage)}>Upload</button>
           </div>
           <div className="add-form-group">
             <label>Image1:</label>
-            <input type="text" name="image1" onChange={(e) => { setImage1(e.target.value) }} />
+            <input type="file" name="image1" onChange={(e) => { setFile1(e.target.files[0]) }} />
+            <button onClick={(e) => uploadPhoto(e, file1, setImage1)}>Upload</button>
           </div>
           <div className="add-form-group">
             <label>Image2:</label>
-            <input type="text" name="image2" onChange={(e) => { setImage2(e.target.value) }} />
+            <input type="file" name="image2" onChange={(e) => { setFile2(e.target.files[0]) }} />
+            <button onClick={(e) => uploadPhoto(e, file2, setImage2)}>Upload</button>
           </div>
           <div className="add-form-group">
             <label>Image3:</label>
-            <input type="text" name="image3" onChange={(e) => { setImage3(e.target.value) }} />
+            <input type="file" name="image3" onChange={(e) => { setFile3(e.target.files[0]) }} />
+            <button onClick={(e) => uploadPhoto(e, file3, setImage3)}>Upload</button>
           </div>
           <div className="add-form-group">
             <label>Stock:</label>
             <input type="number" name="stock" onChange={handleStockChange} />
           </div>
           <button type="button" className="adding-button" onClick={addProduct}>Add Product</button>
-          {itemAdded && <div className="item-added-message">Item added!</div>} {/* Display "Item added!" message */}
         </form>
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 }

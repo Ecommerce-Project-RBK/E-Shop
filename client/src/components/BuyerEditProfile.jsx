@@ -4,10 +4,8 @@ import axios from 'axios';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-const EditProfile = () => {
+const BuyerEditProfile = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -23,7 +21,7 @@ const EditProfile = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      const decodedToken = JSON.parse(atob(token.split('.')[1])); //decode in Base64 and split 
+      const decodedToken = JSON.parse(atob(token.split('.')[1])); 
       console.log("Decoded Token:", decodedToken); 
       setWelcome(`Welcome ${decodedToken.name}!`); 
     }
@@ -35,7 +33,7 @@ const EditProfile = () => {
       return;
     }
 
-    axios.put('http://localhost:8080/api/seller/profile/update', {
+    axios.put('http://localhost:8080/api/Buyer/profile/update', {
       firstname: firstname,
       lastname: lastname,
       email: email,
@@ -47,11 +45,10 @@ const EditProfile = () => {
         console.log(response.data);
         setRefresh(!refresh);
         setWelcome(`Welcome ${response.data.firstname}!`);
-        toast.success("Profile updated successfully!");
       })
       .catch(error => {
         console.error(error);
-        toast.error("An error occurred while updating the profile.");
+        alert("An error occurred while updating the profile.");
       });
   };
 
@@ -63,13 +60,15 @@ const EditProfile = () => {
       <div className="container">
         <div className="sidebar">
           <div className="sidebar-section">
-            <h4 onClick={() => navigate('/add')}>Add Product</h4>
+            
             <ul>
               <li className="active">My Profile</li>
               <li>Address Book</li>
+             
             </ul>
           </div>
-          <div className="sidebar-section"></div>
+          <div className="sidebar-section">
+         </div>
           <div className="sidebar-section">
             <h4>My Wishlist</h4>
           </div>
@@ -138,9 +137,8 @@ const EditProfile = () => {
         </div>
       </div>
       <Footer />
-      <ToastContainer />
     </div>
   );
 };
 
-export default EditProfile;
+export default BuyerEditProfile;
