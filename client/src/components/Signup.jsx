@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
+import axios from "axios";
 import "../CSS/Signup.css";
 
 const SignUp = () => {
@@ -7,9 +8,25 @@ const SignUp = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("buyer");
+  const navigate = useNavigate();
 
-  const handleSignUp = () => {
-    console.log("Signing up", { name, emailOrPhone, password, role });
+  const handleSignUp = async () => {
+    try {
+      const payload = { name, email: emailOrPhone, password };
+      let endpoint;
+
+      if (role === "buyer") {
+        endpoint = "http://localhost:8080/api/auth/register/buyer";
+      } else {
+        endpoint = "http://localhost:8080/api/auth/register/seller";
+      }
+
+      const response = await axios.post(endpoint, payload);
+      console.log("Signup successful", response.data);
+      navigate("/login")
+    } catch (error) {
+      console.error("Signup error", error);
+    }
   };
 
   return (
@@ -44,28 +61,33 @@ const SignUp = () => {
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="form-input"
           />
           <input
             type="text"
             placeholder="Email or Phone Number"
             value={emailOrPhone}
             onChange={(e) => setEmailOrPhone(e.target.value)}
+            className="form-input"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="form-input"
           />
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="form-input"
+          >
             <option value="buyer">Buyer</option>
             <option value="seller">Seller</option>
           </select>
-          <button onClick={handleSignUp}>Create Account</button>
-          <button>Sign up with Google</button>
-          <p>
-            Already have an account? <Link to="/login">Log in</Link>
-          </p>
+          <button onClick={()=>{handleSignUp()}} className="signup-button">
+            Sign Up
+          </button>
         </div>
       </div>
       <footer className="footer">

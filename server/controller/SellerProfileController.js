@@ -26,14 +26,14 @@ module.exports = {
                       .then((result) => {
                         res.send(result);
                       })
-                      .catch((updateError) => {
-                        console.error("Update error:", updateError);
-                        res.status(500).send(updateError);
+                      .catch((error) => {
+                        console.error("Update error:", error);
+                        res.status(500).send(error);
                       });
                   })
-                  .catch((hashError) => {
-                    console.error("Hash error:", hashError);
-                    res.status(500).send(hashError);
+                  .catch((error) => {
+                    console.error("Hash error:", error);
+                    res.status(500).send(error);
                   });
               } else {
                
@@ -45,23 +45,23 @@ module.exports = {
                   .then((result) => {
                     res.send(result);
                   })
-                  .catch((updateError) => {
-                    console.error("Update error:", updateError);
-                    res.status(500).send(updateError);
+                  .catch((error) => {
+                    console.error("Update error:", error);
+                    res.status(500).send(error);
                   });
               }
             } else {
               res.status(401).send("Invalid password");
             }
           })
-          .catch((compareError) => {
-            console.error("Password comparison error:", compareError);
-            res.status(500).send(compareError);
+          .catch((error) => {
+            console.error("Password comparison error:", error);
+            res.status(500).send(error);
           });
       })
-      .catch((findError) => {
-        console.error("Find Seller error:", findError);
-        res.status(500).send(findError);
+      .catch((error) => {
+        console.error("Find Seller error:", error);
+        res.status(500).send(error);
       });
   },
 

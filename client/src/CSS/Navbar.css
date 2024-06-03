@@ -39,18 +39,29 @@
 }
 
 .main-nav .nav-links a {
-    margin-left: 5px;
-  margin-right: 180px;
+    margin-left: 50px;
+  margin-right: 90px;
     text-decoration: none;
     color: black;
+}
+.main-nav .nav-links a:hover {
+    text-decoration: underline; 
+    color: rgb(88, 86, 86);
 }
 
 .main-nav .icons {
     display: flex;
     align-items: center;
+
 }
 
 .main-nav .icons span {
-    margin-left: 10px;
+    margin-right: -5px;
+    padding-right: 1px;
     font-size: 18px;
+    
+}
+.icon-image{
+    width: 32px;
+    height: 25px;
 }

@@ -26,14 +26,14 @@ module.exports = {
                       .then((result) => {
                         res.send(result);
                       })
-                      .catch((updateError) => {
-                        console.error("Update error:", updateError);
-                        res.status(500).send(updateError);
+                      .catch((error) => {
+                        console.error("Update error:", error);
+                        res.status(500).send(error);
                       });
                   })
-                  .catch((hashError) => {
-                    console.error("Hash error:", hashError);
-                    res.status(500).send(hashError);
+                  .catch((error) => {
+                    console.error("Hash error:", error);
+                    res.status(500).send(error);
                   });
               } else {
                
@@ -45,9 +45,9 @@ module.exports = {
                   .then((result) => {
                     res.send(result);
                   })
-                  .catch((updateError) => {
-                    console.error("Update error:", updateError);
-                    res.status(500).send(updateError);
+                  .catch((error) => {
+                    console.error("Update error:", error);
+                    res.status(500).send(error);
                   });
               }
             } else {
@@ -59,9 +59,9 @@ module.exports = {
             res.status(500).send(compareError);
           });
       })
-      .catch((findError) => {
-        console.error("Find buyer error:", findError);
-        res.status(500).send(findError);
+      .catch((error) => {
+        console.error("Find buyer error:", error);
+        res.status(500).send(error);
       });
   },
 

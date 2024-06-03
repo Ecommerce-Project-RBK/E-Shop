@@ -1,13 +1,42 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
 import "../CSS/Login.css";
+import { Link, useNavigate } from "react-router-dom";
+import {jwtDecode} from 'jwt-decode'; 
 
 const Login = () => {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    console.log("Logging in", { emailOrPhone, password });
+  const handleLogin = async () => {
+    try {
+      const payload = { email: emailOrPhone, password };
+      const endpoint = "http://localhost:8080/api/auth/login";
+
+      const response = await axios.post(endpoint, payload);
+      const token = response.data.token; 
+      localStorage.setItem("token", token); // store the token in local storage
+
+      // new decode the token to extract user information
+      const decodedToken = jwtDecode(token);
+      console.log("Decoded Token:", decodedToken);
+
+      // direct based on the user role
+      if (decodedToken.role === 'seller') {
+        navigate("/sellerProfile"); // seller profile
+      } else if (decodedToken.role === 'buyer') {
+        navigate("/buyerProfile"); // Redirect to buyer profile
+      } else if (decodedToken.role === 'admin')
+        { navigate("/admin"); }
+      else {
+        // other roles
+        console.log("Unknown role:", decodedToken.role);
+      }
+    } catch (error) {
+      console.error("Login error", error);
+      alert("Login failed. Please check your credentials and try again.");
+    }
   };
 
   return (
@@ -21,8 +50,8 @@ const Login = () => {
           <div className="logo">Exclusive</div>
           <div className="nav-links">
             <Link to="/">Home</Link>
-            <a href="#">Contact</a>
-            <a href="#">About</a>
+            <a href="/contact">Contact</a>
+            <a href="/about">About</a>
             <Link to="/signup">Sign Up</Link>
           </div>
           <div className="search-container">
@@ -51,7 +80,7 @@ const Login = () => {
           />
           <button onClick={handleLogin}>Log In</button>
           <p>
-            <a>Forgot Password?</a>
+            <a href="#">Forgot Password?</a>
           </p>
         </div>
       </div>
